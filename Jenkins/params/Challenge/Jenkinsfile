@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(defaultValue: "Alias", description: "Build & Deployment name", name: "deploymentName")
+        choice(choices: ["APAC", "EMEA", "AMER"], description: "Where you want to deploy", name: "buildLoc")
+        booleanParam(defaultValue: true, description: "Do you want build the code", name: "buildCheck")
+    }
+
+    stages{
+        stage("name"){
+            steps {
+                echo "Build name is ${params.deploymentName}"
+            }
+        }
+        stage("Location"){
+            steps {
+                echo "Deploy to the location ${params.buildLoc}"
+            }
+        }
+        stage("complete"){
+            steps {
+                echo "Final confirmation: ${params.buildCheck}"
+            }
+        }
+    }
+}
